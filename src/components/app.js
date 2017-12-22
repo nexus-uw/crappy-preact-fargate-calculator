@@ -43,7 +43,7 @@ export default class App extends Component {
 	render({ user }, { time, count, rams }) {
 		return (
 			<div id="app" class={style.profile}>
-				<h1>Fargate Pricing Calculator</h1>
+				<h1>(a really crummy) Fargate Pricing Calculator</h1>
 				<p>This is the user profile for a user named {user}.</p>
 				<div><label>vpcu</label>
 
@@ -67,8 +67,10 @@ export default class App extends Component {
 
 				</div>
 				<div> cost ${this.state.cost} per hour</div>
+
 				<div><a href="https://aws.amazon.com/fargate/pricing/">source</a></div>
 				<footer>note: these prices are from Dec 10 2017 for usa-east-1</footer>
+				<footer>note: ram is not being properly limited to selected vcpu allowed range...</footer>
 			</div>
 		);
 	}

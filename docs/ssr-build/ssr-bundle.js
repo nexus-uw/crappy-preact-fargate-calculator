@@ -112,7 +112,7 @@ var app_rams = [0.5, 1, 2, 3];
 var _ref3 = Object(preact_min["h"])(
 	'h1',
 	null,
-	'Fargate Pricing Calculator'
+	'(a really crummy) Fargate Pricing Calculator'
 );
 
 var _ref4 = Object(preact_min["h"])(
@@ -177,6 +177,12 @@ var _ref13 = Object(preact_min["h"])(
 	'footer',
 	null,
 	'note: these prices are from Dec 10 2017 for usa-east-1'
+);
+
+var _ref14 = Object(preact_min["h"])(
+	'footer',
+	null,
+	'note: ram is not being properly limited to selected vcpu allowed range...'
 );
 
 var app_App = function (_Component) {
@@ -272,7 +278,8 @@ var app_App = function (_Component) {
 				' per hour'
 			),
 			_ref12,
-			_ref13
+			_ref13,
+			_ref14
 		);
 	};
 
