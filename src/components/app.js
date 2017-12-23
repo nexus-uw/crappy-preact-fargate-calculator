@@ -74,10 +74,8 @@ export default class App extends Component {
 			<div id="app" class={style.profile}>
 
 				<h1>(a really crummy) Fargate Pricing Calculator</h1>
-				<p>This is the user profile for a user named {user}.</p>
+
 				<div><label>vpcu</label>
-
-
 					<select value={this.state.vcpu} onChange={this.handleVcpuChange}>
 						<option value="0.25">0.25</option>
 						<option value="0.5">0.5</option>
@@ -85,8 +83,6 @@ export default class App extends Component {
 						<option value="2">2</option>
 						<option value="4">4</option>
 					</select>
-
-
 				</div>
 				<div>
 					<label>ram (GB)</label>
@@ -98,7 +94,7 @@ export default class App extends Component {
 				<div> <h3>cost ~${this.state.cost.toFixed(4)} per hour </h3></div>
 				<hr />
 				<div><a href="https://aws.amazon.com/fargate/pricing/">aws fargate pricing</a></div>
-				<div>note: these prices are from Dec 10 2017 for usa-east-1</div>
+				<div>note: these prices are from Dec 10 2017 for us-east-1</div>
 				<div> source code available at <a href="https://github.com/nexus-uw/crappy-preact-fargate-calculator">nexus-uw/crappy-preact-fargate-calculator</a></div>
 				<img src="assets/709.png" />
 				<footer />

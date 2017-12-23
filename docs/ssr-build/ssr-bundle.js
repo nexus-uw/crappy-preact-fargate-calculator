@@ -199,7 +199,7 @@ var _ref12 = Object(preact_min["h"])(
 var _ref13 = Object(preact_min["h"])(
 	'div',
 	null,
-	'note: these prices are from Dec 10 2017 for usa-east-1'
+	'note: these prices are from Dec 10 2017 for us-east-1'
 );
 
 var _ref14 = Object(preact_min["h"])(
@@ -268,13 +268,6 @@ var app_App = function (_Component) {
 			'div',
 			{ id: 'app', 'class': components_style_default.a.profile },
 			_ref3,
-			Object(preact_min["h"])(
-				'p',
-				null,
-				'This is the user profile for a user named ',
-				user,
-				'.'
-			),
 			Object(preact_min["h"])(
 				'div',
 				null,
