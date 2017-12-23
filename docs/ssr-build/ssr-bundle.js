@@ -84,6 +84,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var style = __webpack_require__("rq4c");
 var style_default = /*#__PURE__*/__webpack_require__.n(style);
 
+// EXTERNAL MODULE: ./style/bare.min.css
+var bare_min = __webpack_require__("lsE6");
+var bare_min_default = /*#__PURE__*/__webpack_require__.n(bare_min);
+
 // EXTERNAL MODULE: ../node_modules/preact/dist/preact.min.js
 var preact_min = __webpack_require__("KM04");
 var preact_min_default = /*#__PURE__*/__webpack_require__.n(preact_min);
@@ -107,7 +111,30 @@ var ram = 0.5;
 var vcpu = 0.25;
 var cost = ram * 0.0506 + vcpu * 0.0127;
 
-var app_rams = [0.5, 1, 2, 3];
+function getRamsForVcpu(vcpu) {
+	function getList(min, max) {
+		var list = [];
+		for (var i = min; i <= max; i++) {
+			list.push(i);
+		}
+		return list;
+	}
+
+	switch (vcpu) {
+		case 0.25:
+			return [0.5, 1, 2];
+		case 0.5:
+			return getList(1, 3);
+		case 1:
+			return getList(2, 8);
+		case 2:
+			return getList(4, 16);
+		case 4:
+			return getList(8, 30);
+		default:
+			throw new Error('unexpected vcpu value: ' + vcpu);
+	}
+}
 
 var _ref3 = Object(preact_min["h"])(
 	'h1',
@@ -147,21 +174,17 @@ var _ref8 = Object(preact_min["h"])(
 
 var _ref9 = Object(preact_min["h"])(
 	'option',
-	{ value: '3' },
-	'3'
-);
-
-var _ref10 = Object(preact_min["h"])(
-	'option',
 	{ value: '4' },
 	'4'
 );
 
-var _ref11 = Object(preact_min["h"])(
+var _ref10 = Object(preact_min["h"])(
 	'label',
 	null,
 	'ram (GB)'
 );
+
+var _ref11 = Object(preact_min["h"])('hr', null);
 
 var _ref12 = Object(preact_min["h"])(
 	'div',
@@ -169,21 +192,30 @@ var _ref12 = Object(preact_min["h"])(
 	Object(preact_min["h"])(
 		'a',
 		{ href: 'https://aws.amazon.com/fargate/pricing/' },
-		'source'
+		'aws fargate pricing'
 	)
 );
 
 var _ref13 = Object(preact_min["h"])(
-	'footer',
+	'div',
 	null,
 	'note: these prices are from Dec 10 2017 for usa-east-1'
 );
 
 var _ref14 = Object(preact_min["h"])(
-	'footer',
+	'div',
 	null,
-	'note: ram is not being properly limited to selected vcpu allowed range...'
+	' source code available at ',
+	Object(preact_min["h"])(
+		'a',
+		{ href: 'https://github.com/nexus-uw/crappy-preact-fargate-calculator' },
+		'nexus-uw/crappy-preact-fargate-calculator'
+	)
 );
+
+var _ref15 = Object(preact_min["h"])('img', { src: 'assets/709.png' });
+
+var _ref16 = Object(preact_min["h"])('footer', null);
 
 var app_App = function (_Component) {
 	_inherits(App, _Component);
@@ -203,19 +235,23 @@ var app_App = function (_Component) {
 			vcpu: vcpu,
 			ram: ram,
 			cost: cost,
-			rams: app_rams
+			rams: getRamsForVcpu(vcpu)
 		}, _this.updateCost = function () {
 			_this.setState({
 				cost: _this.state.ram * 0.0506 + _this.state.vcpu * 0.0127
 			});
 		}, _this.handleVcpuChange = function (event) {
+			var rams = getRamsForVcpu(parseFloat(event.target.value));
+			var ram = rams.indexOf(parseFloat(_this.state.ram)) === -1 ? rams[0] : _this.state.ram;
+
 			_this.setState({
-				vcpu: event.target.value
+				vcpu: event.target.value,
+				rams: rams,
+				ram: ram
 			});
 
 			_this.updateCost();
 		}, _this.handleRamChange = function (event) {
-			console.log(event.target.value);
 			_this.setState({ ram: parseFloat(event.target.value) });
 			_this.updateCost();
 		}, _temp), _possibleConstructorReturn(_this, _ret);
@@ -250,18 +286,17 @@ var app_App = function (_Component) {
 					_ref6,
 					_ref7,
 					_ref8,
-					_ref9,
-					_ref10
+					_ref9
 				)
 			),
 			Object(preact_min["h"])(
 				'div',
 				null,
-				_ref11,
+				_ref10,
 				Object(preact_min["h"])(
 					'select',
 					{ value: this.state.ram, onChange: this.handleRamChange },
-					rams.map(function (r) {
+					this.state.rams.map(function (r) {
 						return Object(preact_min["h"])(
 							'option',
 							{ key: r, value: r },
@@ -273,13 +308,21 @@ var app_App = function (_Component) {
 			Object(preact_min["h"])(
 				'div',
 				null,
-				' cost $',
-				this.state.cost,
-				' per hour'
+				' ',
+				Object(preact_min["h"])(
+					'h3',
+					null,
+					'cost ~$',
+					this.state.cost.toFixed(4),
+					' per hour '
+				)
 			),
+			_ref11,
 			_ref12,
 			_ref13,
-			_ref14
+			_ref14,
+			_ref15,
+			_ref16
 		);
 	};
 
@@ -288,6 +331,7 @@ var app_App = function (_Component) {
 
 
 // CONCATENATED MODULE: ./index.js
+
 
 
 
@@ -495,6 +539,13 @@ var app_App = function (_Component) {
     }, render: function render() {} });var $ = { h: t, createElement: t, cloneElement: o, Component: T, render: M, rerender: i, options: S }; true ? module.exports = $ : self.preact = $;
 }();
 //# sourceMappingURL=preact.min.js.map
+
+/***/ }),
+
+/***/ "lsE6":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 

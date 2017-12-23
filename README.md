@@ -1,4 +1,8 @@
-# {{ name }}
+# crappy preact fargate calculator
+
+https://nexus-uw.github.io/crappy-preact-fargate-calculator/
+
+css provided by http://barecss.com/
 
 ## CLI Commands
 
