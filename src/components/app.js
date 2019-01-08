@@ -4,7 +4,7 @@ import { h, Component } from 'preact';
 import style from './style';
 const ram = 0.5;
 const vcpu = 0.25;
-const cost = (ram * 0.0506) + (vcpu * 0.0127);
+const cost = (ram * 0.004445) + (vcpu * 0.04048);
 
 function getRamsForVcpu(vcpu) {
 	function getList(min, max) {
@@ -44,7 +44,7 @@ export default class App extends Component {
 
 	updateCost = () => {
 		this.setState({
-			cost: (this.state.ram * 0.0506) + (this.state.vcpu * 0.0127)
+			cost: (this.state.ram * 0.004445) + (this.state.vcpu * 0.04048)
 		});
 	}
 
@@ -94,7 +94,7 @@ export default class App extends Component {
 				<div> <h3>cost ~${this.state.cost.toFixed(4)} per hour </h3></div>
 				<hr />
 				<div><a href="https://aws.amazon.com/fargate/pricing/">aws fargate pricing</a></div>
-				<div>note: these prices are from Dec 10 2017 for us-east-1</div>
+				<div>note: these prices are from Jan 7 2019 for us-east-1</div>
 				<div> source code available at <a href="https://github.com/nexus-uw/crappy-preact-fargate-calculator">nexus-uw/crappy-preact-fargate-calculator</a></div>
 				<img src="assets/709.png" />
 				<footer />
